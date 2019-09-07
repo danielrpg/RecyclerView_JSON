@@ -10,3 +10,7 @@ Public static final fields (constants) are ALL_CAPS_WITH_UNDERSCORES.
 ```
 
 https://source.android.com/setup/contribute/code-style#follow-field-naming-conventions 
+
+## Add the correspondien dependencies from androidx following this tutorial
+
+http://digigene.com/android/androidx-migration-in-a-nutshell/
