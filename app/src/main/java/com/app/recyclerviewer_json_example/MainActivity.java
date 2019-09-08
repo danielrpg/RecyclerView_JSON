@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -20,13 +21,18 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemAdapter.OnItemClickListener{
+
+    private final static String KITTEN_CATS_URL = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
+    public final static String EXTRA_URL = "imageUrl";
+    public final static String EXTRA_CREATOR = "creatorName";
+    public final static String EXTRA_LIKES = "likeCount";
 
     private RecyclerView mRecycler;
     private ItemAdapter mAdapter;
     private ArrayList<Item> mItemList;
     private RequestQueue mRequestQueue;
-    private final static String KITTEN_CATS_URL = "https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             mAdapter = new ItemAdapter(MainActivity.this, mItemList);
+                            mAdapter.setOnItemClickListener(MainActivity.this);
+
                             mRecycler.setAdapter(mAdapter);
 
                         } catch (JSONException e) {
@@ -76,5 +84,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mRequestQueue.add(request);
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Intent intentDetail = new Intent(this, DetailActivity.class);
+
+        Item item = mItemList.get(position);
+
+        intentDetail.putExtra(EXTRA_URL, item.getImageUrl());
+        intentDetail.putExtra(EXTRA_CREATOR, item.getCreator());
+        intentDetail.putExtra(EXTRA_LIKES, item.getLikes());
+
+        startActivity(intentDetail);
     }
 }

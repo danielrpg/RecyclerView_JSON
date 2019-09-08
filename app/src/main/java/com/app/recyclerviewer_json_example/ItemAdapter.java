@@ -18,6 +18,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     private Context mContext;
     private ArrayList<Item> mItemList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
 
     public ItemAdapter(Context context, ArrayList<Item> itemList) {
         mContext = context;
@@ -36,6 +45,18 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             mImageView = itemView.findViewById(R.id.image_view_item);
             mCreator = itemView.findViewById(R.id.text_view_creator_item);
             mLikes = itemView.findViewById(R.id.text_view_likes_item);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(mListener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION) {
+                            mListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
