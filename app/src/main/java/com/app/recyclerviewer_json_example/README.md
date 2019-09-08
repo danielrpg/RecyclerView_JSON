@@ -14,3 +14,6 @@ https://source.android.com/setup/contribute/code-style#follow-field-naming-conve
 ## Add the correspondien dependencies from androidx following this tutorial
 
 http://digigene.com/android/androidx-migration-in-a-nutshell/
+
+## The image resources API is :
+https://pixabay.com/api/?key=5303976-fd6581ad4ac165d1b75cc15b3&q=kitten&image_type=photo&pretty=true

@@ -55,7 +55,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         int likes = currentItem.getLikes();
 
         holder.mCreator.setText(creator);
-        holder.mCreator.setText("Likes: " + likes);
+        holder.mLikes.setText("Likes: " + likes);
 
         Picasso.get().load(imageUrl).fit().centerInside().into(holder.mImageView);
     }
